@@ -2,8 +2,7 @@
 
 struct station {
 	int waitingPassengers;
-	int onBoardPassengers;
-	int availableSeatsOnTrain;
+	int availablePlacesOnTrain;
 	pthread_mutex_t mutTrain;
 	pthread_cond_t trainArrivedCond;
 	pthread_cond_t trainFullCond;
