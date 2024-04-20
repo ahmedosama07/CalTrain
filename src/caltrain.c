@@ -37,6 +37,7 @@ station_wait_for_train(struct station *station)
 	{
 		pthread_cond_wait(&station->trainArrivedCond, &station->mutTrain);
 	}
+	station->waitingPassengers--;
 	station->availablePlacesOnTrain--;
 	pthread_mutex_unlock(&station->mutTrain);
 }
@@ -45,7 +46,6 @@ void
 station_on_board(struct station *station)
 {
 	pthread_mutex_lock(&station->mutTrain);
-	station->waitingPassengers--;
 	station->availablePlacesOnTrain--;
 	if (station->availablePlacesOnTrain == 0 || station->waitingPassengers == 0)
 	{
